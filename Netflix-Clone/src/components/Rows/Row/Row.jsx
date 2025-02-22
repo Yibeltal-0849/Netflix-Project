@@ -8,16 +8,17 @@ const Row = ({ title, fetchUrl, isLargeRow }) => {
   const [movies, setMovie] = useState([]);
   const [trailerUrl, setTrailerUrl] = useState("");
 
-  const base_url = "https://image.tmdb.org/t/p/original";
+  const base_url = "https://image.tmdb.org/t/p/original/";
 
   useEffect(() => {
+    console.log("Fetching data from:", fetchUrl);
     const fetchData = async () => {
       try {
         const request = await axios.get(fetchUrl);
-
+        console.log("Fetched movies:", request.data.results);
         setMovie(request.data.results);
       } catch (error) {
-        console.error("error", error);
+        console.error("Error fetching data:", error);
       }
     };
     fetchData();
